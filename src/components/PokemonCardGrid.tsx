@@ -65,7 +65,7 @@ export function PokemonCardGrid({ isLoading, pokemon }: PokemonCardGridProps) {
             </span>
             <span className="browse-card-types">
               {item.types.map((type) => (
-                <TypeBadge key={type} type={type} />
+                <TypeBadge type={type} size="md" />
               ))}
             </span>
           </Link>

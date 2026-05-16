@@ -291,6 +291,7 @@ input {
   color: var(--muted);
 }
 
+
 .inline-type-row,
 .hero-types,
 .browse-card-types {
@@ -298,9 +299,10 @@ input {
   flex-wrap: wrap;
   gap: 6px;
   align-items: center;
-  width: 50%;
-  min-height: 50px; 
 }
+
+
+
 .attack-meta {
   display: flex;
   flex-wrap: wrap;
@@ -315,26 +317,59 @@ input {
 .type-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;                
-  padding: 4px 12px;       
-  border-radius: 20px;     
-  font-size: 14px;
+  gap: 6px;
+  border-radius: 999px;
   font-weight: bold;
-  white-space: nowrap;     
-  width: fit-content;
-
+  white-space: nowrap;
+  line-height: 1;
+  
 }
+
+
+
+.type-sm {
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+.type-md {
+  padding: 4px 12px;
+  font-size: 14px;
+  padding-right: 5;
+}
+
+.type-lg {
+  padding: 6px 16px;
+  font-size: 16px;
+}
+
+
 
 .type-icon {
+  object-fit: contain;
+}
+
+.type-sm .type-icon {
   width: 10px;
   height: 10px;
-  object-fit: contain;
-  margin-right: 5px;
 }
+
+.type-md .type-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.type-lg .type-icon {
+  width: 18px;
+  height: 18px;
+}
+
+
 
 .type-fire {
   --type-color: #b33a24;
   --type-bg: #fff0eb;
+  
 }
 
 .type-grass {
@@ -355,6 +390,7 @@ input {
 .type-poison {
   --type-color: #7a4ca0;
   --type-bg: #f5edfb;
+ 
 }
 
 .type-flying {
@@ -386,6 +422,11 @@ input {
 .type-ice {
   --type-color: #2a7984;
   --type-bg: #edf9fb;
+}
+
+.type-compact {
+  padding: 2px 6px;
+  font-size: 11px;
 }
 
 .pokemon-card {
@@ -553,6 +594,7 @@ input {
 .attack-meta small {
   color: var(--muted);
   font-weight: 800;
+  margin: 5px;
 }
 
 .evolution-list {

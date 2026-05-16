@@ -7,21 +7,20 @@ import {
 
 type TypeBadgeProps = {
   type: string;
+  size?: "sm" | "md" | "lg";
 };
 
-export function TypeBadge({ type }: TypeBadgeProps) {
+export function TypeBadge({ type, size = "md" }: TypeBadgeProps) {
   const pokemonType = getPokemonType(type);
 
   return (
-    <span className={`type-badge type-${pokemonType.slug}`}>
-      <Image
-        alt=""
-        aria-hidden="true"
-        className="type-icon"
-        height={5}
-        src={pokemonType.icon}
-        width={5}
-      />
+    <span className={`type-badge type-${pokemonType.slug} type-${size}`}>
+   <img
+    alt=""
+    aria-hidden="true"
+    className="type-icon"
+    src={pokemonType.icon}
+    />
       {pokemonType.name}
     </span>
   );

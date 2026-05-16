@@ -65,7 +65,7 @@ export function PokemonResult({
               <small>#{closestPokemon.number}</small>
               <span className="inline-type-row">
                 {closestPokemon.types.map((type) => (
-                  <TypeBadge key={type} type={type} />
+                  <TypeBadge key={type} type={type} size="lg" />
                 ))}
               </span>
             </span>
@@ -95,7 +95,7 @@ export function PokemonResult({
           <p className="classification">{pokemon.classification}</p>
           <div className="hero-types">
             {pokemon.types.map((type) => (
-              <TypeBadge key={type} type={type} />
+              <TypeBadge key={type} type={type} size="lg" />
             ))}
           </div>
 
@@ -156,7 +156,7 @@ export function PokemonResult({
                   href={`/?q=${encodeURIComponent(evolution.name)}`}
                   key={evolution.id}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+               
                   <img alt={evolution.name} src={evolution.image} />
                   <span className="evolution-copy">
                     <strong>{evolution.name}</strong>
@@ -249,7 +249,7 @@ function AttackList({ attacks }: { attacks: PokemonAttack[] }) {
         <li className="attack-card" key={`${attack.name}-${attack.type}`}>
           <strong>{attack.name}</strong>
           <span className="attack-meta">
-            <TypeBadge type={attack.type} />
+            <TypeBadge type={attack.type} size="md"/>
             <small>{attack.damage} damage</small>
           </span>
         </li>
