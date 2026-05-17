@@ -67,16 +67,7 @@ export function SearchInput({ isSearching, value }: SearchInputProps) {
             type="search"
             value={draft}
           />
-          {hasDraft ? (
-            <button
-              aria-label="Clear Pokemon search"
-              className="clear-button"
-              onClick={handleClear}
-              type="button"
-            >
-              x
-            </button>
-          ) : null}
+       
         </div>
       </div>
       <p className="hint" id="pokemon-search-help">
