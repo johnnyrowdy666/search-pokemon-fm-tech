@@ -1,4 +1,5 @@
-import type { ApolloError } from "@apollo/client";
+import { TypeCoverage } from "@/components/TypeCoverage";
+import { ApolloError } from "@apollo/client";
 import Link from "next/link";
 import type { Pokemon, PokemonAttack, PokemonPreview } from "@/lib/pokemon";
 import { TypeBadge } from "@/components/TypeBadge";
@@ -10,6 +11,7 @@ type PokemonResultProps = {
   closestPokemon: PokemonPreview | null;
   pokemon: Pokemon | null;
   searchTerm: string;
+  typeFilter?: string | null;
 };
 
 export function PokemonResult({
@@ -18,7 +20,8 @@ export function PokemonResult({
   loading,
   closestPokemon,
   pokemon,
-  searchTerm
+  searchTerm,
+  typeFilter
 }: PokemonResultProps) {
   if (isEmpty) {
     return (
@@ -30,11 +33,26 @@ export function PokemonResult({
     );
   }
 
+  if (typeFilter) {
+    return (
+      <section className="panel state-panel">
+        <h2>Type search</h2>
+        <p>
+          Showing <strong>{typeFilter}</strong>-type Pokemon.
+        </p>
+        <p className="hint">Tip: Clear the search to browse all Pokemon.</p>
+      </section>
+    );
+  }
+
   if (loading) {
     return (
       <section className="panel state-panel" aria-live="polite">
-        <h2>Searching...</h2>
-        <p>Looking up {searchTerm} through the GraphQL proxy.</p>
+        <div className="pokemon-card-loading" style={{ height: '300px', borderRadius: '8px' }}></div>
+        <div style={{ marginTop: '20px' }}>
+          <div className="pokemon-card-loading" style={{ height: '20px', width: '60%', margin: '10px auto' }}></div>
+          <div className="pokemon-card-loading" style={{ height: '16px', width: '40%', margin: '10px auto' }}></div>
+        </div>
       </section>
     );
   }
@@ -126,6 +144,10 @@ export function PokemonResult({
 
         <DetailSection title="Weaknesses">
           <TagList values={pokemon.weaknesses} />
+        </DetailSection>
+
+        <DetailSection title="Coverage" wide>
+          <TypeCoverage types={pokemon.types} />
         </DetailSection>
 
         <DetailSection title="Fast attacks" wide>

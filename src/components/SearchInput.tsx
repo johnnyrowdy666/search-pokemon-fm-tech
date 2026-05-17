@@ -60,10 +60,10 @@ export function SearchInput({ isSearching, value }: SearchInputProps) {
           <input
             aria-describedby="pokemon-search-help"
             id="pokemon-search"
-            className="search-input"
+            className={`search-input ${isSearching ? 'searching' : ''}`}
             name="q"
             onChange={(event) => setDraft(event.target.value)}
-            placeholder="Try Bulbasaur, Charmander, or Squirtle"
+            placeholder="Try Bulbasaur, Charmander, or type:Fire"
             type="search"
             value={draft}
           />
@@ -80,7 +80,7 @@ export function SearchInput({ isSearching, value }: SearchInputProps) {
         </div>
       </div>
       <p className="hint" id="pokemon-search-help">
-        Results update automatically as you type, and the URL stays shareable.
+        Results update automatically as you type, and the URL stays shareable. Try "type:fire" to browse by type.
       </p>
     </form>
   );

@@ -173,11 +173,18 @@ input {
   background: var(--panel-soft);
   color: var(--foreground);
   outline: none;
+  transition: all 0.3s ease;
 }
 
 .search-input:focus {
   border-color: rgba(37, 99, 235, 0.58);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+}
+
+.search-input.searching {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: pulse 1.5s ease-in-out infinite alternate;
 }
 
 .search-input::placeholder {
@@ -241,6 +248,18 @@ input {
 .state-panel {
   padding: 30px;
   text-align: center;
+}
+
+.pokemon-card-loading {
+  animation: pulse 1.5s ease-in-out infinite alternate;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 8px;
+}
+
+@keyframes pulse {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 0%; }
 }
 
 .state-panel h2 {
@@ -322,8 +341,25 @@ input {
   font-weight: bold;
   white-space: nowrap;
   line-height: 1;
-  
+  padding: 6px 12px;
 }
+
+.type-badge::before {
+ 
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 999px;
+}
+
+
+
+
 
 
 
@@ -517,14 +553,15 @@ input {
 .content-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  padding: 18px;
+  gap: 22px;
+  padding: 22px;
+  margin-top: 24px;
 }
 
 .detail-section {
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 18px;
+  padding: 22px;
   background: var(--panel-soft);
 }
 
@@ -572,7 +609,7 @@ input {
 .dimension-card {
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 12px;
+  padding: 16px;
   background: white;
 }
 
@@ -664,22 +701,22 @@ input {
   background: var(--panel-soft);
   color: inherit;
   text-decoration: none;
-  transition:
-    border-color 160ms ease,
-    transform 160ms ease,
-    box-shadow 160ms ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .browse-card:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
   border-color: rgba(37, 99, 235, 0.34);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
-  transform: translateY(-2px);
 }
 
 .browse-card img {
   width: 100%;
   height: 98px;
   object-fit: contain;
+  border-radius: 4px;
 }
 
 .browse-card-copy {
@@ -731,6 +768,97 @@ input {
   font-weight: 800;
 }
 
+/* Weakness Filter Styles */
+.weakness-filter {
+  margin: 20px 0;
+}
+
+.filter-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 800;
+  color: var(--foreground);
+}
+
+.type-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.type-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 6px 12px;
+  background: var(--panel-soft);
+  color: var(--foreground);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.type-filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.15);
+  border-color: rgba(37, 99, 235, 0.5);
+  background: #dbeafe;
+}
+
+.type-filter-btn.active {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+.type-filter-btn.active:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.type-selector {
+  margin-top: 1rem;
+}
+
+.type-selector-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.type-selector-header .filter-label {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.type-selector-dropdown {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--panel-soft);
+  color: var(--foreground);
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.clear-filter-btn:hover {
+  background: #fee2e2;
+  border-color: #fecaca;
+  transform: translateY(-1px);
+}
+
+.type-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
 @media (max-width: 780px) {
   .page-shell {
     width: min(100% - 20px, 1120px);
@@ -760,5 +888,22 @@ input {
 
   .pokemon-hero {
     padding: 18px;
+  }
+
+  .pokemon-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .browse-card {
+    min-height: 80px;
+  }
+
+  .browse-card-copy strong {
+    font-size: 1.2rem;
+  }
+
+  .type-filters {
+    gap: 6px;
   }
 }

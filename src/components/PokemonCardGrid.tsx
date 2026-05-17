@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { PokemonPreview } from "@/lib/pokemon";
 import { TypeBadge } from "@/components/TypeBadge";
+import { WeaknessFilter } from "@/components/WeaknessFilter";
+import { filterByWeakness } from "@/lib/type-chart";
 
 const PAGE_SIZE = 10;
 
@@ -14,12 +16,20 @@ type PokemonCardGridProps = {
 
 export function PokemonCardGrid({ isLoading, pokemon }: PokemonCardGridProps) {
   const [page, setPage] = useState(1);
-  const pageCount = Math.max(1, Math.ceil(pokemon.length / PAGE_SIZE));
+  const [weaknessFilter, setWeaknessFilter] = useState<string | null>(null);
+
+  const filteredPokemon = useMemo(() => {
+    if (!weaknessFilter) return pokemon;
+    return filterByWeakness(pokemon, weaknessFilter);
+  }, [pokemon, weaknessFilter]);
+
+  const pageCount = Math.max(1, Math.ceil(filteredPokemon.length / PAGE_SIZE));
   const safePage = Math.min(page, pageCount);
+
   const visiblePokemon = useMemo(() => {
     const start = (safePage - 1) * PAGE_SIZE;
-    return pokemon.slice(start, start + PAGE_SIZE);
-  }, [pokemon, safePage]);
+    return filteredPokemon.slice(start, start + PAGE_SIZE);
+  }, [filteredPokemon, safePage]);
 
   if (isLoading && pokemon.length === 0) {
     return (
@@ -44,10 +54,12 @@ export function PokemonCardGrid({ isLoading, pokemon }: PokemonCardGridProps) {
           <h2 id="browse-title">Pokemon cards</h2>
         </div>
         <p>
-          Showing {visiblePokemon.length} of {pokemon.length}. Select a card to
+          Showing {visiblePokemon.length} of {filteredPokemon.length}. Select a card to
           open its details.
         </p>
       </div>
+
+      <WeaknessFilter activeType={weaknessFilter} onSelect={(type) => { setWeaknessFilter(type); setPage(1); }} />
 
       <div className="pokemon-grid">
         {visiblePokemon.map((item) => (
