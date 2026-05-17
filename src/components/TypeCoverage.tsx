@@ -30,7 +30,7 @@ export function TypeCoverage({ types }: TypeCoverageProps) {
           <ul className="tag-list">
             {weaknesses.map(([name, val]) => (
               <li key={name}>
-                <TypeBadge type={name} size="sm" />
+                <TypeBadge type={name} size="md" />
                 <span className="multiplier">×{val}</span>
               </li>
             ))}
@@ -43,7 +43,7 @@ export function TypeCoverage({ types }: TypeCoverageProps) {
           <ul className="tag-list">
             {strongAgainst.map(([name, val]) => (
               <li key={name}>
-                <TypeBadge type={name} size="sm" />
+                <TypeBadge type={name} size="md" />
                 <span className="multiplier">×{val}</span>
               </li>
             ))}

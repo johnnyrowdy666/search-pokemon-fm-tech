@@ -81,6 +81,7 @@ export function PokemonSearchApp() {
         <SearchInput
           isSearching={loading || deferredQueryValue !== queryValue}
           value={queryValue}
+          allPokemon={indexData?.pokemons ?? []}
         />
         <TypeSelector activeType={typeFilter} onSelect={handleTypeSelect} />
       </section>

@@ -262,6 +262,66 @@ input {
   100% { background-position: 100% 0%; }
 }
 
+/* Autocomplete Dropdown Styles */
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.autocomplete-dropdown-content {
+  padding: 4px 0;
+}
+
+.autocomplete-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.autocomplete-item:hover {
+  background-color: var(--panel-soft);
+}
+
+.autocomplete-item-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.autocomplete-item-info {
+  flex: 1;
+}
+
+.autocomplete-item-name {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.autocomplete-item-number {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 2px 0;
+}
+
+.autocomplete-item-types {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
 .state-panel h2 {
   margin: 0 0 8px;
 }
@@ -342,6 +402,7 @@ input {
   white-space: nowrap;
   line-height: 1;
   padding: 6px 12px;
+  margin: 4px 6px 4px 0;
 }
 
 .type-badge::before {
@@ -391,12 +452,12 @@ input {
 }
 
 .type-md .type-icon {
-  width: 14px;
+  width: 25px;
   height: 14px;
 }
 
 .type-lg .type-icon {
-  width: 18px;
+  width: 10px;
   height: 18px;
 }
 
@@ -847,17 +908,55 @@ input {
   font-size: inherit;
 }
 
-.clear-filter-btn:hover {
-  background: #fee2e2;
-  border-color: #fecaca;
-  transform: translateY(-1px);
+.clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #e5e7eb; 
+  border-radius: 16px;
+  padding: 6px 12px;
+  background: #ffffff;
+  color: #6b7280; 
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+
+.clear-btn:hover {
+  background-color: #f3f4f665; 
+  color: #111827;
+  border-color: #d1d5db;
+
+}
+
+
+.clear-btn.active {
+  background: #eff6ff; 
+  color: #2563eb;
+  border-color: #2563eb;
+}
+
+
+.clear-btn.active:hover {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border-color: #1d4ed8;
 }
 
 .type-icon {
   width: 16px;
   height: 16px;
   object-fit: contain;
+  
 }
+.multiplier{
+
+  font-weight: bold;
+
+}
+
 
 @media (max-width: 780px) {
   .page-shell {
@@ -906,4 +1005,7 @@ input {
   .type-filters {
     gap: 6px;
   }
+
+  
 }
+

@@ -32,7 +32,7 @@ export function WeaknessFilter({
         })}
         {activeType && (
           <button
-            className="clear-filter-btn"
+            className="clear-btn"
             onClick={() => onSelect(null)}
             type="button"
           >
